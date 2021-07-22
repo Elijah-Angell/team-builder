@@ -1,52 +1,34 @@
 import React, { useState } from "react";
+import Form from "./Form";
 import './App.css';
 
 
 function App() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [role, setRole] = useState()
+  const [members, setMembers] = useState([])
 
-
-  const handleNameChange = event => {
-    setName(event.target.value);
-  };
-
-  const handleEmailChange = event => {
-    setEmail(event.target.value);
-  };
-
-  const handleRoleChange = event => {
-    setRole(event.target.value);
-  };
-
-  const handleSubmit = event => {
-    event.preventDefault();
-    console.log(name);
-    console.log(email);
-    console.log(role);
-  };
-
-
-
+  const addMembers = (member) => {
+    setMembers(...members, member)
+  }
   return (
     <div className="App">
-      <form onSubmit={event => handleSubmit(event)}>
-        <label>
-          name:
-          <input type="text" onChange={event => handleNameChange(event)} />
-        </label>
-        <label>
-          email:
-          <input type="text" onChange={event => handleEmailChange(event)} />
-        </label>
-        <label>
-          role:
-          <input type="change" onChange={event => handleRoleChange(event)} />
-        </label>
-      </form>
+      <h2>Team Members List</h2>
+      {members.map((member, idx) => {
+        return (
+          <React.Fragment key={idx}>
+            <p >{member.name}</p>
+            <p >{member.email}</p>
+            <p >{member.role}</p>
+          </React.Fragment>
+        )
+      })}
+      <Form addMembers={addMembers} />
     </div>
   );
-}
+};
+
+
+
+
+
 
 export default App;
